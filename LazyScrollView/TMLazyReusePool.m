@@ -21,6 +21,7 @@
     if (self = [super init]) {
         _reuseDict = [NSMutableDictionary dictionary];
     }
+
     return self;
 }
 
@@ -29,11 +30,14 @@
     if (reuseIdentifier == nil || reuseIdentifier.length == 0 || itemView == nil) {
         return;
     }
+
     NSMutableSet *reuseSet = [_reuseDict tm_safeObjectForKey:reuseIdentifier];
+
     if (!reuseSet) {
         reuseSet = [NSMutableSet set];
         [_reuseDict setObject:reuseSet forKey:reuseIdentifier];
     }
+
     [reuseSet addObject:itemView];
 }
 
@@ -47,24 +51,30 @@
     if (reuseIdentifier == nil || reuseIdentifier.length == 0) {
         return nil;
     }
+
     UIView *result = nil;
     NSMutableSet *reuseSet = [_reuseDict tm_safeObjectForKey:reuseIdentifier];
+
     if (reuseSet && reuseSet.count > 0) {
         if (!muiID) {
             result = [reuseSet anyObject];
-        } else {
+        }
+        else {
             for (UIView *itemView in reuseSet) {
                 if ([itemView.muiID isEqualToString:muiID]) {
                     result = itemView;
                     break;
                 }
             }
+
             if (!result) {
                 result = [reuseSet anyObject];
             }
         }
+
         [reuseSet removeObject:result];
     }
+
     return result;
 }
 
@@ -76,9 +86,11 @@
 - (NSSet<UIView *> *)allItemViews
 {
     NSMutableSet *result = [NSMutableSet set];
+
     for (NSMutableSet *reuseSet in _reuseDict.allValues) {
         [result unionSet:reuseSet];
     }
+
     return [result copy];
 }
 

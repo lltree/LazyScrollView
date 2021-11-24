@@ -21,11 +21,15 @@
 
 - (void)addModel:(TMLazyItemModel *)itemModel;
 - (void)addModels:(NSSet<TMLazyItemModel *> *)itemModels;
+
 - (void)removeModel:(TMLazyItemModel *)itemModel;
 - (void)removeModels:(NSSet<TMLazyItemModel *> *)itemModels;
+
 - (void)reloadModel:(TMLazyItemModel *)itemModel;
 - (void)reloadModels:(NSSet<TMLazyItemModel *> *)itemModels;
+
 - (void)clear;
+
 - (NSSet<TMLazyItemModel *> *)showingModelsFrom:(CGFloat)startY to:(CGFloat)endY;
 
 @end

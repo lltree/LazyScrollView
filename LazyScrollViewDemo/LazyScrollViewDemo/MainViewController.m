@@ -45,7 +45,7 @@
 {
     NSString *demoName = self.demoArray[indexPath.row];
     UIViewController *vc;
-    if ([demoName isEqualToString:@"OuterScrollView"]) {
+    if ([demoName isEqualToString:@"OuterScrollView"]) {//外层有一个ScrollView
         vc = [OuterViewController new];
     } else if ([demoName isEqualToString:@"LoadMore"]) {
         vc = [MoreViewController new];

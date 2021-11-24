@@ -16,7 +16,7 @@
 /**
  Item view's frame in LazyScrollView.
  */
-@property (nonatomic, assign) CGRect absRect;
+@property (nonatomic, assign) CGRect absRect;//在LazyScrollView中的位置
 @property (nonatomic, readonly) CGFloat top;
 @property (nonatomic, readonly) CGFloat bottom;
 

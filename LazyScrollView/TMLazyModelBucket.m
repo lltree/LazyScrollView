@@ -23,18 +23,22 @@
         _bucketHeight = bucketHeight;
         _buckets = [NSMutableArray array];
     }
+
     return self;
 }
 
 - (void)addModel:(TMLazyItemModel *)itemModel
 {
     if (itemModel && itemModel.bottom > itemModel.top) {
+        //floor 取整
         NSInteger startIndex = (NSInteger)floor(itemModel.top / _bucketHeight);
         NSInteger endIndex = (NSInteger)floor((itemModel.bottom - 0.01) / _bucketHeight);
+
         for (NSInteger index = 0; index <= endIndex; index++) {
             if (_buckets.count <= index) {
                 [_buckets addObject:[NSMutableSet set]];
             }
+
             if (index >= startIndex && index <= endIndex) {
                 NSMutableSet *bucket = [_buckets objectAtIndex:index];
                 [bucket addObject:itemModel];
@@ -92,18 +96,22 @@
     NSMutableSet *result = [NSMutableSet set];
     NSInteger startIndex = (NSInteger)floor(startY / _bucketHeight);
     NSInteger endIndex = (NSInteger)floor((endY - 0.01) / _bucketHeight);
+
     for (NSInteger index = 0; index <= endIndex; index++) {
         if (_buckets.count > index && index >= startIndex && index <= endIndex) {
             NSSet *bucket = [_buckets objectAtIndex:index];
             [result unionSet:bucket];
         }
     }
+
     NSMutableSet *needToBeRemoved = [NSMutableSet set];
+
     for (TMLazyItemModel *itemModel in result) {
         if (itemModel.top >= endY || itemModel.bottom <= startY) {
             [needToBeRemoved addObject:itemModel];
         }
     }
+
     [result minusSet:needToBeRemoved];
     return [result copy];
 }
