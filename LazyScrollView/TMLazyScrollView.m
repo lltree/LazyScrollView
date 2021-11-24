@@ -124,7 +124,7 @@ void * const LazyObserverContext = "LazyObserverContext";
         _autoClearGestures = YES;
         _loadAllItemsImmediately = YES;
         
-        _reusePool = [TMLazyReusePool new];
+        _reusePool = [TMLazyReusePool new];//缓存池
         
         _visibleItems = [[NSMutableSet alloc] init];
         
